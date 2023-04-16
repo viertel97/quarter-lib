@@ -5,16 +5,19 @@ import subprocess
 
 def get_last_version() -> str:
     """Return the version number of the last release."""
-    json_string = (
-        subprocess.run(
-            ["gh", "release", "view", "--json", "tagName"],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+    try:
+        json_string = (
+            subprocess.run(
+                ["gh", "release", "view", "--json", "tagName"],
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            .stdout.decode("utf8")
+            .strip()
         )
-        .stdout.decode("utf8")
-        .strip()
-    )
+    except subprocess.CalledProcessError as err:
+        return "0.0.1"
 
     return json.loads(json_string)["tagName"]
 
