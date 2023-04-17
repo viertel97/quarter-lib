@@ -30,10 +30,9 @@ def get_secrets(secrets: list):
         "token": __get_token()
     }
     response = requests.post(SECRET_URL, json=payload, headers=HEADERS).json()
-    values = list(response.values())
-    if len(values) == 1:
-        return values[0]
-    return values
+    if len(secrets) == 1:
+        return response[secrets[0]]
+    return [response[secret] for secret in secrets]
 
 
 def get_target(name: str):
