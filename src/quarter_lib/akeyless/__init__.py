@@ -1,7 +1,9 @@
-import requests
-from dotenv import dotenv_values
+import os
 
-env_values = dotenv_values("cred.env")
+import requests
+from dotenv import load_dotenv
+
+load_dotenv("cred.env")
 
 AUTH_URL = "https://api.akeyless.io/auth"
 SECRET_URL = "https://api.akeyless.io/get-secret-value"
@@ -16,8 +18,8 @@ HEADERS = {
 def __get_token():
     token_response = requests.post(AUTH_URL, json={
         "access-type": "access_key",
-        "access-id": env_values['access_id'],
-        "access-key": env_values['access_key'],
+        "access-id": os.environ['access_id'],
+        "access-key": os.environ['access_key'],
     }, headers=HEADERS).json()
     return token_response['token']
 
