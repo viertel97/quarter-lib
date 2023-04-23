@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 logger = setup_logging(__file__)
 values_loaded = load_dotenv("cred.env")
-logger.info("credentials loaded from env: " + values_loaded)
+logger.info("credentials loaded from env: " + str(values_loaded))
 
 AUTH_URL = "https://api.akeyless.io/auth"
 SECRET_URL = "https://api.akeyless.io/get-secret-value"
