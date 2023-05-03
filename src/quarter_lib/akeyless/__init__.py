@@ -12,9 +12,6 @@ logger.info("credentials loaded from env: " + str(values_loaded))
 ACCESS_ID = os.getenv('access_id')
 ACCESS_KEY = os.getenv('access_key')
 
-logger.info("access_id: " + str(ACCESS_ID))
-logger.info("access_key: " + str(ACCESS_KEY))
-
 AUTH_URL = "https://api.akeyless.io/auth"
 SECRET_URL = "https://api.akeyless.io/get-secret-value"
 TARGET_URL = "https://api.akeyless.io/get-target-details"
