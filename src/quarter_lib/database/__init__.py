@@ -1,8 +1,5 @@
 import requests
 
-from ..logging import setup_logging
-
-logger = setup_logging(__file__)
 BASE_URL = "http://localhost:8100"
 
 
