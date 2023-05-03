@@ -3,7 +3,24 @@ requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
+name = "quarter-lib"
+dynamic = [
+    "version",
+]
+description = "TBD"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "viertel97", email = "janik.viertel@outlook.com" },
+]
+keywords = [
+
+]
+classifiers = [
+
+]
 dependencies = [
     "requests",
+    "dotenv",
     "loguru",
 ]
