@@ -46,19 +46,19 @@ class NewBook(BaseModel):
     type: str
 
 
-class timer(DefaultModel):
+class Timer(DefaultModel):
     context: str
 
 
-class app_usage(DefaultModel):
+class AppUsage(DefaultModel):
     app: str
 
 
-class power(BaseModel):
+class Power(BaseModel):
     type: str
 
 
-class drug_session(BaseModel):
+class DrugSession(BaseModel):
     beer: Optional[str]
     wine: Optional[str]
     liquor: Optional[str]

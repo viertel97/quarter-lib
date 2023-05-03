@@ -54,4 +54,4 @@ def get_target(name: str):
         "token": __get_token()
     }
     response = requests.post(TARGET_URL, json=payload, headers=HEADERS).json()
-    return response['value']['db_target_details'].values()
+    return list(response['value']['db_target_details'].values())
