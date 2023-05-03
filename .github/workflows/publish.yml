@@ -3,13 +3,15 @@ on:
   release:
     types: [ published ]
 jobs:
-  publish-service-client-package:
+  pypi:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Publish PyPi package
-        uses: code-specialist/pypi-poetry-publish@v1
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          PUBLISH_REGISTRY_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          fetch-depth: 0
+      - run: python3 -m pip install --upgrade build && python3 -m build
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
