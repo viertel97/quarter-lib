@@ -31,7 +31,9 @@ def __get_token():
     return token_response['token']
 
 
-def get_secrets(secrets: list):
+def get_secrets(secrets):
+    if isinstance(secrets, str):
+        secrets = [secrets]
     payload = {
         "accessibility": "regular",
         "names": secrets,
