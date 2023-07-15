@@ -33,7 +33,6 @@ def __get_token():
     return token_response['token']
 
 
-@cache
 def get_secrets(secrets):
     if isinstance(secrets, str):
         secrets = [secrets]
@@ -43,13 +42,23 @@ def get_secrets(secrets):
         "pretty-print": True,
         "token": __get_token()
     }
-    response = requests.post(SECRET_URL, json=payload, headers=HEADERS).json()
+    try:
+        response = requests.post(SECRET_URL, json=payload, headers=HEADERS).json()
+    except Exception as e:
+        logger.error(e)
+        __get_token.cache_clear()
+        payload = {
+            "accessibility": "regular",
+            "names": secrets,
+            "pretty-print": True,
+            "token": __get_token()
+        }
+        response = requests.post(SECRET_URL, json=payload, headers=HEADERS).json()
     if len(secrets) == 1:
         return response[secrets[0]]
     return [response[secret] for secret in secrets]
 
 
-@cache
 def get_target(name: str):
     payload = {
         "show-versions": False,
