@@ -2,6 +2,7 @@ import os
 
 import requests
 from dotenv import load_dotenv
+from functools import cache
 
 from ..logging import setup_logging
 
@@ -22,6 +23,7 @@ HEADERS = {
 }
 
 
+@cache
 def __get_token():
     token_response = requests.post(AUTH_URL, json={
         "access-type": "access_key",
@@ -31,6 +33,7 @@ def __get_token():
     return token_response['token']
 
 
+@cache
 def get_secrets(secrets: list):
     payload = {
         "accessibility": "regular",
@@ -44,6 +47,7 @@ def get_secrets(secrets: list):
     return [response[secret] for secret in secrets]
 
 
+@cache
 def get_target(name: str):
     payload = {
         "show-versions": False,
