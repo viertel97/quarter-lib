@@ -65,5 +65,15 @@ def get_target(name: str):
         "name": name,
         "token": __get_token()
     }
-    response = requests.post(TARGET_URL, json=payload, headers=HEADERS).json()
+    try:
+        response = requests.post(TARGET_URL, json=payload, headers=HEADERS).json()
+    except Exception as e:
+        logger.error(e)
+        __get_token.cache_clear()
+        payload = {
+            "show-versions": False,
+            "name": name,
+            "token": __get_token()
+        }
+        response = requests.post(TARGET_URL, json=payload, headers=HEADERS).json()
     return list(response['value']['db_target_details'].values())
