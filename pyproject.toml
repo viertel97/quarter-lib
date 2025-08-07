@@ -7,6 +7,7 @@ build-backend = "setuptools.build_meta"
 [tool.poetry.dependencies]
 requests = "2.28.2"
 google-auth-oauthlib = "1.2.2"
+google-auth = "2.40.3"
 todoist-api-python = "3.1.0"
 PyMySQL = "1.0.2"
 loguru = "0.6.0"
