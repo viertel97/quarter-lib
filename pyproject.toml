@@ -29,6 +29,7 @@ dependencies = [
     "python-dotenv",
     "pydantic"
 ]
+dynamic = ["version"]
 
 [project.urls]
 Repository = "https://github.com/viertel97/quarter-lib"
