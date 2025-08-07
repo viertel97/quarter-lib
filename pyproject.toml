@@ -7,14 +7,16 @@ name = "quarter_lib"
 description = "TBD"
 readme = "README.md"
 requires-python = ">=3.6"
-license = {text = "BSD License"}
-urls = { 
-    Homepage = "https://github.com/viertel97/quarter-lib",
-    Changelog = "https://github.com/viertel97/quarter-lib/releases"
-}
+license = "MIT"
+authors = [
+  {name = "Janik Viertel", email = "janik.viertel@outlook.com"}
+]
+maintainers = [
+  {name = "Janik Viertel", email = "janik.viertel@outlook.com"}
+]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: BSD License",
+    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers"
 ]
 dependencies = [
@@ -27,6 +29,10 @@ dependencies = [
     "python-dotenv",
     "pydantic"
 ]
+
+[project.urls]
+Repository = "https://github.com/viertel97/quarter-lib"
+Changelog = "https://github.com/viertel97/quarter-lib/releases"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
