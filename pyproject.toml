@@ -29,8 +29,10 @@ dependencies = [
     "google-api-python-client==2.178.0",
     
     "todoist-api-python==3.1.0",
-    
-    "PyMySQL==1.0.2"
+
+    "PyMySQL==1.0.2",
+
+    "SpeechRecognition==3.14.3"
     
 ]
 dynamic = ["version"]
