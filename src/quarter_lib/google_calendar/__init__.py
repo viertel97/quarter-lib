@@ -1,12 +1,11 @@
 import json
-import os
-import pickle
 from datetime import datetime, timedelta
 
 import pytz
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
+from loguru import logger
+from quarter_lib.akeyless import get_secrets
 
 from ..logging import setup_logging
 
@@ -17,32 +16,12 @@ SCOPES = [
 ]
 
 DEFAULT_GERMAN_OFFSET = 7200
+GOOGLE_TOKEN = get_secrets("google/token.json")
 
-if os.name == "nt":
-    PICKLE_PATH = r"D:\OneDrive\Code\tasker-proxy\config\token.pickle"
-    CREDS_PATH = r"D:\OneDrive\Code\tasker-proxy\config\cred8.json"
-else:
-    PICKLE_PATH = "/home/pi/code/tasker-proxy/config/token.pickle"
-    CREDS_PATH = "/home/pi/code/tasker-proxy/config/cred8.json"
+
 
 def build_calendar_service():
-    creds = None
-    if os.path.exists(PICKLE_PATH):
-        with open(PICKLE_PATH, "rb") as token:
-            creds = pickle.load(token)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            try:
-                creds.refresh(Request())
-            except Exception:
-                flow = InstalledAppFlow.from_client_secrets_file(CREDS_PATH, SCOPES)
-                creds = flow.run_local_server()
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(CREDS_PATH, SCOPES)
-            creds = flow.run_local_server(port=5669)
-        with open(PICKLE_PATH, "wb") as token:
-            pickle.dump(creds, token)
-
+    creds = Credentials.from_authorized_user_info(GOOGLE_TOKEN, SCOPES)
     return build("calendar", "v3", credentials=creds)
 
 def timezone_from_datetime(dt: datetime):
